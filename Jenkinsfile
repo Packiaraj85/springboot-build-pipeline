@@ -28,16 +28,17 @@ pipeline {
     }
 
    stage('Stage III: SCA') {
+     environment {
+          JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
+          PATH = "${JAVA_HOME}/bin:${env.PATH}"
+          NVD_API_KEY = credentials('nvd-api-key')
+        }
       steps { 
         echo "Running Software Composition Analysis using OWASP Dependency-Check ..."
-        sh "export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64; mvn org.owasp:dependency-check-maven:check"
-        sh '''
-            mvn org.owasp:dependency-check-maven:check \
-              -DnvdDatafeedUrl="https://dependency-check.github.io/DependencyCheck_Builder/nvd_cache/nvdcve-2.0-%d.json.gz"
-        '''
+        sh 'mvn org.owasp:dependency-check-maven:check -DnvdApiKey=$NVD_API_KEY'
+        }
       }
-    }
-
+  
    stage('Stage IV: SAST') {
       steps { 
         echo "Running Static application security testing using SonarQube Scanner ..."
