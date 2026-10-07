@@ -2,7 +2,7 @@
 pipeline {
   agent { label 'build' }
    environment { 
-        registry = "adamtravis/democicd" 
+        registry = "yesudassre/democicd" 
         registryCredential = 'dockerhub' 
    }
 
