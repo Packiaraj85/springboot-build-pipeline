@@ -30,7 +30,11 @@ pipeline {
    stage('Stage III: SCA') {
       steps { 
         echo "Running Software Composition Analysis using OWASP Dependency-Check ..."
-        sh "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64; mvn org.owasp:dependency-check-maven:check"
+        sh "export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64; mvn org.owasp:dependency-check-maven:check"
+        sh '''
+            mvn org.owasp:dependency-check-maven:check \
+              -DnvdDatafeedUrl="https://dependency-check.github.io/DependencyCheck_Builder/nvd_cache/nvdcve-2.0-%d.json.gz"
+        '''
       }
     }
 
