@@ -27,17 +27,6 @@ pipeline {
       }
     }
 
-   stage('Stage III: SCA') {
-     environment {
-          JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
-          PATH = "${JAVA_HOME}/bin:${env.PATH}"
-          NVD_API_KEY = credentials('nvd-api-key')
-        }
-      steps { 
-        echo "Running Software Composition Analysis using OWASP Dependency-Check ..."
-        sh 'mvn org.owasp:dependency-check-maven:check -DnvdApiKey=$NVD_API_KEY'
-        }
-      }
     stage('Stage III: SCA') {
       environment {
         JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
