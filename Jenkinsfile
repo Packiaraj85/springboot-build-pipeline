@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: ' patch-1', credentialsId: 'GitlabCred', url: 'https://gitlab.com/yesudas.sre/springboot-build-pipeline.git'
+        git branch: 'patch-1', credentialsId: 'GitlabCred', url: 'https://gitlab.com/yesudas.sre/springboot-build-pipeline.git'
       }
     }
   
