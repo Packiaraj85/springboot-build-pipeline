@@ -123,6 +123,7 @@
                  <format>json</format>
                  <format>html</format>
                  </formats>
+                 <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
               </configuration>
              </plugin>
 	    <plugin>
