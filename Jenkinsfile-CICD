@@ -69,14 +69,14 @@ pipeline {
    stage('Stage VII: Scan Image ') {
       steps { 
         echo "Scanning Image for Vulnerabilities"
-        sh "trivy image --scanners vuln --offline-scan adamtravis/democicd:$BUILD_NUMBER > trivyresults.txt"
+        sh "trivy image --scanners vuln --offline-scan packiarajd/idp:$BUILD_NUMBER > trivyresults.txt"
         }
     }
           
    stage('Stage VIII: Smoke Test ') {
       steps { 
         echo "Smoke Test the Image"
-        sh "docker run -d --name smokerun -p 8080:8080 adamtravis/democicd:$BUILD_NUMBER"
+        sh "docker run -d --name smokerun -p 8080:8080 packiarajd/idp:$BUILD_NUMBER"
         sh "sleep 90; ./check.sh"
         sh "docker rm --force smokerun"
         }
