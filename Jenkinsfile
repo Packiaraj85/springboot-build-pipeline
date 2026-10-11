@@ -28,9 +28,12 @@ pipeline {
     }
 
    stage('Stage III: SCA') {
+      environment {
+        NVD_KEY = credentials('nvd-api-key')
+      }
       steps { 
         echo "Running Software Composition Analysis using OWASP Dependency-Check ..."
-        sh "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64; mvn org.owasp:dependency-check-maven:check"
+        sh 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64; mvn org.owasp:dependency-check-maven:check -DnvdApiKey="${NVD_KEY}"'
       }
     }
 
