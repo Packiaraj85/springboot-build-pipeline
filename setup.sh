@@ -15,7 +15,7 @@ fi
 # Install Java 8, Java 11 & Docker
 apt update
 apt install -y openjdk-8-jdk openjdk-11-jdk docker.io maven
-usermod -a -G docker ubuntu
+usermod -a -G docker packiarajd
 
 # Install Trivy
 wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
